@@ -22,6 +22,15 @@ namespace ApiBundle\Components\Response\Group;
  * @author   David Houthoofdt <david@houthoofdt.be>
  * @access   public
  */
-class Cget {
-    //put your code here
+class Cget extends \ApiBundle\Components\Response
+{
+    /**
+     * return the groups
+     * 
+     * @return array
+     */
+    public function buildResponse()
+    {
+        return $this->dm->getData();
+    }
 }

@@ -27,15 +27,14 @@ class JsonDataManager {
     protected $file;
     
     public function __construct(string $file) {
-        $this->file = $file;
+        $this->file = __DIR__ . '/Data/' . $file;
         //simple converter ... just raw data return ...
         //no memory checks or performance done (for the example)
-        if (is_file($file)) {
+        if (is_file($this->file)) {
             //normaly add proper json validations ...
-            $this->data = json_decode(file_get_contents($file), true);
+            $this->data = json_decode(file_get_contents($this->file), true);
         } else {
-            //for the example just throw a simple exception ... bad practice to show
-            //Server paths  ... but again just for example
+            //for the example just throw a simple exception
             throw new \Exception(sprintf('The json file %s doesn\'t excist', $file));
         }
     }
@@ -58,6 +57,8 @@ class JsonDataManager {
      */
     public function storeData(array $data)
     {
+        //again data should be validated ... but for purpose of the example
+        //this is skipped 
         return file_put_contents($this->file, json_encode($data));
     }
 }

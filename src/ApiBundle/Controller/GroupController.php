@@ -47,9 +47,8 @@ class GroupController extends AbstractController
      */
     public function cgetAction()
     {
-        die('CGET IN PROGRESS');
-        //$req = new \ApiBundle\Components\Request\Group\Cget($this->getRequest());
-       /* $res = new \ApiBundle\Components\Response\Group\Cget($req, $this->dataManager);
-        return $res->getResponse($this);*/
+        $req = new \ApiBundle\Components\Request\Group\Cget($this->getRequest());
+        $res = new \ApiBundle\Components\Response\Group\Cget($req, $this->dataManager);
+        return $res->getResponse($this);
     }
 }
