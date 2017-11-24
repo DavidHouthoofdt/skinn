@@ -1,7 +1,13 @@
 services:
-  api.entry_rest_controller:
-      class: ApiBundle\Controller\GroupController
+    api.group_rest_controller:
+        class: ApiBundle\Controller\GroupController
+        arguments:
+            - "@request_stack"
+            - "@groupDataManager"
+            
+    api.file_rest_controller:
+      class: ApiBundle\Controller\FileController
       arguments:
           - "@request_stack"
-          - "@groupDataManager"
+          - "@fileDataManager"
 

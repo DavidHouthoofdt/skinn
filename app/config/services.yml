@@ -34,6 +34,11 @@ services:
         class: DataBundle\JsonDataManager
         arguments:
           - "groups.json"
+          
+    fileDataManager:
+        class: DataBundle\JsonDataManager
+        arguments:
+          - "files.json"
 
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:

@@ -1,4 +1,8 @@
 groups:
     type: rest
-    resource: api.entry_rest_controller
+    resource: api.group_rest_controller
+    name_prefix:  api_1
+files:
+    type: rest
+    resource: api.file_rest_controller
     name_prefix:  api_1
