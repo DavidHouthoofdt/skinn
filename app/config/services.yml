@@ -30,7 +30,10 @@ services:
         tags: ['controller.service_arguments']
         
         
- 
+    groupDataManager:
+        class: DataBundle\JsonDataManager
+        arguments:
+          - "~/../../src/DataBundle/Data/groups.json"
 
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:

@@ -3,5 +3,5 @@ services:
       class: ApiBundle\Controller\GroupController
       arguments:
           - "@request_stack"
-
+          - "@groupDataManager"
 
