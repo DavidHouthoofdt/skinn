@@ -1,0 +1,4 @@
+groups:
+    type: rest
+    resource: api.entry_rest_controller
+    name_prefix:  api_1

@@ -1,0 +1,7 @@
+services:
+  api.entry_rest_controller:
+      class: ApiBundle\Controller\GroupController
+      arguments:
+          - "@request_stack"
+
+
