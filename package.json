@@ -38,7 +38,10 @@
       "react/jsx-uses-vars": 1,
       "no-console": 0,
       "no-useless-escape": 0,
-      "quotes" : ["warn", "single"]
+      "quotes": [
+        "warn",
+        "single"
+      ]
     }
   },
   "dependencies": {
@@ -70,6 +73,7 @@
     "gulp-load-plugins": "^1.5.0",
     "gulp-minify": "^1.0.0",
     "gulp-sourcemaps": "^2.6.0",
-    "gulp-uglify": "^3.0.0"
+    "gulp-uglify": "^3.0.0",
+    "webpack": "^3.8.1"
   }
 }
