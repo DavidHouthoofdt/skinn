@@ -18,3 +18,5 @@
 /node_modules/*
 /*.log
 /nbproject/private/
+build
+/src/ViewBundle/Resources/js/react-engine.js
