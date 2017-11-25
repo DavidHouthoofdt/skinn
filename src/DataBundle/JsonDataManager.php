@@ -139,4 +139,23 @@ class JsonDataManager {
         unset($this->data[$id]);
         return $this->storeData($data);
     }
+    
+    /**
+     * Find the data
+     * 
+     * @param array $search
+     */
+    public function findData($search)
+    {
+        $results = $this->data;
+        foreach ($search as $key => $value) {
+            $results = array_filter(
+                $results,
+                function($current) use ($key, $value) {
+                    return (isset($current[$key]) && $current[$key] == $value);
+                } 
+            );
+        }
+        return $results;
+    }
 }
