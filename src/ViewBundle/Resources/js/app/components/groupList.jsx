@@ -3,9 +3,9 @@
 var _ = require('lodash');
 
 import React, {Component} from 'react';
+import GroupDetail from './groupDetail';
 
 class GroupList extends Component {
-
 
   constructor(props) {
     super(props);
@@ -77,7 +77,7 @@ class GroupList extends Component {
                {groups}
             </div>
             <div className="group-detail">
-
+                <GroupDetail group={this.state.activeGroup} />
             </div>
         </div>
     );

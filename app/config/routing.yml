@@ -6,6 +6,7 @@ api:
     resource: "@ApiBundle/Resources/config/routing.yml"
     prefix:  /api
     type: rest
+    
 
 fallback:
     resource: "@ViewBundle/Resources/config/routing.yml"

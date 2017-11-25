@@ -4,6 +4,8 @@ services:
         arguments:
             - "@request_stack"
             - "@groupDataManager"
+        calls:
+          - [setFileManager, ['@fileDataManager']]
             
     api.file_rest_controller:
       class: ApiBundle\Controller\FileController

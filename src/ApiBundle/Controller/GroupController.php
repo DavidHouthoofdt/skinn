@@ -14,9 +14,6 @@
 
 namespace ApiBundle\Controller;
 
-use Exception;
-use Symfony\Component\HttpFoundation\JsonResponse;
-
 /**
  * This is the restfull controller for the groups
  * This will create a group, get a group, update group and delete group
@@ -25,8 +22,21 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  * @author   David Houthoofdt <david@houthoofdt.be>
  * @access   public
  */
-class GroupController extends AbstractController
+class GroupController extends AbstractController 
 {
+    protected $fileManager = null;
+    
+    /**
+     * Set the needed file manager
+     * 
+     * @param \DataBundle\JsonDataManager $fileManager
+     */
+    public function setFileManager($fileManager)
+    {
+        $this->fileManager = $fileManager;
+        return $this;
+    }
+    
     /**
      * Get the group details
      *
@@ -49,6 +59,18 @@ class GroupController extends AbstractController
     {
         $req = new \ApiBundle\Components\Request\Group\Cget($this->getRequest());
         $res = new \ApiBundle\Components\Response\Group\Cget($req, $this->dataManager);
+        return $res->getResponse($this);
+    }
+    
+    /**
+     * Get the files of the group
+     * 
+     * @return type
+     */
+    public function getFilesAction($id)
+    {
+        $req = new \ApiBundle\Components\Request\Group\File\Get($this->getRequest());
+        $res = new \ApiBundle\Components\Response\Group\File\Get($req, $this->dataManager, $this->fileManager);
         return $res->getResponse($this);
     }
 }
