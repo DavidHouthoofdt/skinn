@@ -72,6 +72,21 @@ class JsonDataManager {
     }
     
     /**
+     * Get the data based on the id
+     * 
+     * @param int $id the id
+     * 
+     * @return array|null
+     */
+    public function getById($id)
+    {
+        if (!isset($this->data[$id])) {
+            throw new \Exception(sprintf('id %d not found', $id));
+        }
+        return $this->data[$id];
+    }
+    
+    /**
      * Update the data
      * 
      * @param int $id
