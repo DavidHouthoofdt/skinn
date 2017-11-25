@@ -1,1 +1,21 @@
-Hello World!
+{# app/Resources/views/base.html.twig #}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Test skinn</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+    </head>
+    <body>
+        <div id="app"></div>
+        
+        {% javascripts
+        '@jquery'
+        '@app_js'
+        output='js/compiled/main.js' %}
+        <script src="{{ asset_url }}?v=2"></script>
+        {% endjavascripts %}
+        {% block scripts %}{% endblock %}
+        
+    </body>
+</html>

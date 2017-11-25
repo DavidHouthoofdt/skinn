@@ -1,0 +1,14 @@
+assetic:
+  debug:          '%kernel.debug%'
+  use_controller: '%kernel.debug%'
+  filters:
+    cssrewrite: ~
+  assets:
+        app_js:
+            inputs:
+                - "%kernel.root_dir%/../src/ViewBundle/Resources/js/react-engine.js"
+                - "%kernel.root_dir%/Resources/js/init.js"
+        jquery:
+            inputs:
+                #- "%kernel.root_dir%/../node_modules/jquery/dist/jquery.js"
+                - "https://code.jquery.com/jquery-1.9.1.js"

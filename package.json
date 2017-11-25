@@ -47,17 +47,18 @@
   "dependencies": {
     "babel-eslint": "~7.2.0",
     "babel-jest": "^20.0.0",
+    "browserify": "~14.4.0",
     "eslint": "^3.19.0",
     "eslint-plugin-react": "^7.0.1",
     "fbemitter": "^2.1.1",
-    "react": "~15.5.4",
-    "react-dom": "~15.5.4",
-    "react-bootstrap": "~0.31.0",
-    "react-slider": "~0.8.0",
     "jquery": "~2.1.0",
-    "uglify-js": ">=3.0.15",
+    "lodash": "^4.17.4",
+    "react": "~15.5.4",
+    "react-bootstrap": "~0.31.0",
+    "react-dom": "~15.5.4",
+    "react-slider": "~0.8.0",
     "requirejs": "~2.3.3",
-    "browserify": "~14.4.0"
+    "uglify-js": ">=3.0.15"
   },
   "devDependencies": {
     "babel-plugin-transform-class-properties": "^6.24.1",
