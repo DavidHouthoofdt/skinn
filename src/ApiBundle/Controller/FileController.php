@@ -38,7 +38,9 @@ class FileController extends AbstractController
      */
     public function getAction($id)
     {
-        die('GET IN PROGRESS!!!');
+        $req = new \ApiBundle\Components\Request\File\Get($this->getRequest());
+        $res = new \ApiBundle\Components\Response\File\Get($req, $this->dataManager);
+        return $res->getResponse($this);
     }
 
     /**
