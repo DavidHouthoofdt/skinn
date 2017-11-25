@@ -1,0 +1,3 @@
+view_homepage:
+    path:     /
+    defaults: { _controller: ViewBundle:Default:index }
