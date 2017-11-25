@@ -15,7 +15,7 @@
 namespace ApiBundle\Components\Request\Group;
 
 /**
- * The request for the listing of the products
+ * The request for the listing of the groups
  *
  * Example usage:
  *

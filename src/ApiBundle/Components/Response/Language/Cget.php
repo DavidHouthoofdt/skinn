@@ -11,10 +11,10 @@
  * License:      2016  http://www.gnu.org/copyleft/lesser.html
  *
  */
-namespace ApiBundle\Components\Response\File;
+namespace ApiBundle\Components\Response\Language;
 
 /**
- * The request for the listing of the files
+ * The request for the listing of the languages
  *
  * Example usage:
  *
@@ -25,7 +25,7 @@ namespace ApiBundle\Components\Response\File;
 class Cget extends \ApiBundle\Components\Response
 {
     /**
-     * return the files
+     * return the languages
      * 
      * @return array
      */

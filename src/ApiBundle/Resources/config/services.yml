@@ -10,4 +10,10 @@ services:
       arguments:
           - "@request_stack"
           - "@fileDataManager"
-
+          
+    api.language_rest_controller:
+      class: ApiBundle\Controller\LanguageController
+      arguments:
+          - "@request_stack"
+          - "@languageDataManager"      
+         

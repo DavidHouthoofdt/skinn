@@ -15,7 +15,7 @@
 namespace ApiBundle\Components\Request\File;
 
 /**
- * The request for the listing of the products
+ * The request for the listing of the files
  *
  * Example usage:
  *
@@ -26,7 +26,7 @@ namespace ApiBundle\Components\Request\File;
 class Cget extends \ApiBundle\Components\Request
 {
     /**
-     * Get the input filter for loading the groups
+     * Get the input filter for loading the files
      *
      * @return array
      */

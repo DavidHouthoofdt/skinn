@@ -1,4 +1,5 @@
 <?php
+
 /*
 /*
  * Author:       David Houthoofdt
@@ -11,10 +12,10 @@
  * License:      2016  http://www.gnu.org/copyleft/lesser.html
  *
  */
-namespace ApiBundle\Components\Response\File;
+namespace ApiBundle\Components\Request\Language;
 
 /**
- * The request for the listing of the files
+ * The request for the listing of the languages
  *
  * Example usage:
  *
@@ -22,15 +23,15 @@ namespace ApiBundle\Components\Response\File;
  * @author   David Houthoofdt <david@houthoofdt.be>
  * @access   public
  */
-class Cget extends \ApiBundle\Components\Response
+class Cget extends \ApiBundle\Components\Request
 {
     /**
-     * return the files
-     * 
+     * Get the input filter for loading the languages
+     *
      * @return array
      */
-    public function buildResponse()
+    protected function getInputFilter()
     {
-        return $this->dm->getData();
+        return [];
     }
 }

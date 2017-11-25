@@ -6,3 +6,7 @@ files:
     type: rest
     resource: api.file_rest_controller
     name_prefix:  api_1
+languages:
+    type: rest
+    resource: api.language_rest_controller
+    name_prefix:  api_1

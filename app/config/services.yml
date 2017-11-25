@@ -39,8 +39,9 @@ services:
         class: DataBundle\JsonDataManager
         arguments:
           - "files.json"
-
-    # add more services, or override services that need manual wiring
-    # AppBundle\Service\ExampleService:
-    #     arguments:
-    #         $someArgument: 'some_value'
+          
+    languageDataManager:
+        class: DataBundle\JsonDataManager
+        arguments:
+          - "languages.json"
+         
