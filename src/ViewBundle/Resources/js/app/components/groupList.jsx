@@ -78,6 +78,10 @@ class GroupList extends Component {
                <hr />
             </div>
             <div className="group-detail">
+            {this.state.activeGroup !== null &&
+                <span>Active group : {this.state.activeGroup.label}<hr /></span>
+                
+            }
                 <GroupDetail group={this.state.activeGroup} />
                 <hr />
             </div>
