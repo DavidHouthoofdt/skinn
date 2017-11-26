@@ -37,4 +37,12 @@ class LanguageController extends AbstractController
         $res = new \ApiBundle\Components\Response\Language\Cget($req, $this->dataManager);
         return $res->getResponse($this);
     }
+    
+    
+    public function postAction()
+    {
+        $req = new \ApiBundle\Components\Request\Language\Post($this->getRequest());
+        $res = new \ApiBundle\Components\Response\Language\Post($req, $this->dataManager);
+        return $res->getResponse($this);
+    }
 }

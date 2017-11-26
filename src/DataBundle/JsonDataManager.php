@@ -112,14 +112,14 @@ class JsonDataManager {
      * 
      * @throws Exception
      * 
-     * @return int (new id)
+     * @return boolean
      */
     public function insertData(array &$data) 
     {
-        $newId = array_size($this->data) + 1;
+        $newId = sizeof($this->data) + 1;
         $data['id'] = $newId;
         $this->data[$newId] = $data;
-        return $newId;
+        return $this->storeData($this->data);
     }
     
     /**
