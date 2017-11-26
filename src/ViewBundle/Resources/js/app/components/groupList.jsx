@@ -62,7 +62,7 @@ class GroupList extends Component {
 
         return (
           <div className="groupItem" onClick={selectGroup.bind(this)}>
-            {group.label}
+            {group.name}
           </div>
         );
     }.bind(this));
@@ -79,7 +79,7 @@ class GroupList extends Component {
             </div>
             <div className="group-detail">
             {this.state.activeGroup !== null &&
-                <span>Active group : {this.state.activeGroup.label}<hr /></span>
+                <span>Active group : {this.state.activeGroup.name}<hr /></span>
                 
             }
                 <GroupDetail group={this.state.activeGroup} />

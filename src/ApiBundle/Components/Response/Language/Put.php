@@ -14,7 +14,7 @@
 namespace ApiBundle\Components\Response\Language;
 
 /**
- * This file handle the creation of the new language
+ * This file handle the update of the  language
  *
  * Example usage:
  *
@@ -22,7 +22,7 @@ namespace ApiBundle\Components\Response\Language;
  * @author   David Houthoofdt <david@houthoofdt.be>
  * @access   public
  */
-class Post extends \ApiBundle\Components\Response
+class Put extends \ApiBundle\Components\Response
 {
     /**
      * return the languages
@@ -31,11 +31,16 @@ class Post extends \ApiBundle\Components\Response
      */
     public function buildResponse()
     {
-        $newLanguage = ['name' => $this->request->get('name')];
-        if ($this->dm->insertData($newLanguage)) {
-            return $newLanguage;
+        $language = $this->dm->getById($this->request->get('id'));
+        if (empty($language)) {
+            throw new \Exception('Language not found');
+        }
+        $update = array_merge($this->request->getRequestParams(), $language);
+        
+        if ($this->dm->updateData($this->request->get('id'), $update)) {
+            return $update;
         } else {
-            throw new \Exception('Unable to create the new language (i should add the reason why)');
+            throw new \Exception('Unable to update the language (i should add the reason why)');
         }
     }
 }

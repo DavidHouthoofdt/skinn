@@ -52,7 +52,7 @@ class FileList extends Component {
                 this.fileSelect(file);
             };
            return (
-            <li onClick={selectFile.bind(this)}>{file.label}</li>
+            <li onClick={selectFile.bind(this)}>{file.name}</li>
            )
         });
     }
@@ -77,7 +77,7 @@ class FileList extends Component {
             <hr />
             <div className="file-detail">
             {this.state.activeFile !== null &&
-                <span>Active file : {this.state.activeFile.label}<hr /></span>
+                <span>Active file : {this.state.activeFile.name}<hr /></span>
             }
              <hr />
             </div>

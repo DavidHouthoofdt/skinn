@@ -99,13 +99,33 @@ abstract class Request
     {
         //check the data in all request data!
         //route, post and query
-        $data = array_merge(
+        $data = $this->getAllRequestParams();
+        $this->validateData($data, $this->getInputFilter(), '');
+        return empty($this->errors);
+    }
+    
+    /**
+     * Get all request params from the stack
+     * 
+     * @return array
+     */
+    public function getAllRequestParams()
+    {
+        return array_merge(
             $this->request->request->all(),
             $this->request->query->all(),
             $this->request->attributes->all()
         );
-        $this->validateData($data, $this->getInputFilter(), '');
-        return empty($this->errors);
+    }
+    
+    /**
+     * Get the request params
+     * 
+     * @return array
+     */
+    public function getRequestParams()
+    {
+        return $this->request->request->all();
     }
 
     /**

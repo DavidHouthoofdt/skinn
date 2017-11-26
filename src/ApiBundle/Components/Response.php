@@ -39,7 +39,7 @@ abstract class Response
 
     /**
      *
-     * @var DataManager
+     * @var JsonDataManager
      */
     protected $dm;
 

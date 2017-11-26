@@ -63,7 +63,7 @@ class LanguageList extends Component {
         };
         return (
           <div className="languageItem" onClick={selectLanguage.bind(this)}>
-            {language.label}
+            {language.name}
           </div>
         );
     }.bind(this));
@@ -77,7 +77,7 @@ class LanguageList extends Component {
            {languages}
            <hr />
            {this.state.activeLanguage !== null &&
-                <span>Active Language : {this.state.activeLanguage.label}<hr /></span>
+                <span>Active Language : {this.state.activeLanguage.name}<hr /></span>
                 
             }
         </div>

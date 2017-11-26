@@ -1,4 +1,5 @@
 <?php
+
 /*
 /*
  * Author:       David Houthoofdt
@@ -11,10 +12,10 @@
  * License:      2016  http://www.gnu.org/copyleft/lesser.html
  *
  */
-namespace ApiBundle\Components\Response\Group;
+namespace ApiBundle\Components\Request\Language;
 
 /**
- * This file handle the creation of the new groups
+ * The request handler for updating languages
  *
  * Example usage:
  *
@@ -22,20 +23,22 @@ namespace ApiBundle\Components\Response\Group;
  * @author   David Houthoofdt <david@houthoofdt.be>
  * @access   public
  */
-class Post extends \ApiBundle\Components\Response
+class Put extends \ApiBundle\Components\Request
 {
     /**
-     * return the group 
-     * 
+     * Get the input filter for loading the languages
+     *
      * @return array
      */
-    public function buildResponse()
+    protected function getInputFilter()
     {
-        $newGroup = ['name' => $this->request->get('name')];
-        if ($this->dm->insertData($newGroup)) {
-            return $newGroup;
-        } else {
-            throw new \Exception('Unable to create the new group (i should add the reason why)');
-        }
+        return [
+            'name' => [
+                'required' => true,
+            ],
+            'id' => [
+                'required' => true,
+            ]
+        ];
     }
 }

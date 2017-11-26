@@ -102,7 +102,7 @@ class JsonDataManager {
             throw new \Exception(sprintf('id %d not found', $id));
         }
         $this->data[$id] = $data;
-        return $this->storeData($data);
+        return $this->storeData($this->data);
     }
     
      /**
