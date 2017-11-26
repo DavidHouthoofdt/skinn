@@ -43,7 +43,7 @@ class LanguageController extends AbstractController
         return $res->getResponse($this);
     }
     
-     public function putAction($id)
+    public function putAction($id)
     {
         $req = new \ApiBundle\Components\Request\Language\Put($this->getRequest());
         $res = new \ApiBundle\Components\Response\Language\Put($req, $this->dataManager);

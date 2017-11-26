@@ -80,4 +80,11 @@ class GroupController extends AbstractController
         $res = new \ApiBundle\Components\Response\Group\Post($req, $this->dataManager);
         return $res->getResponse($this);
     }
+    
+    public function putAction($id)
+    {
+        $req = new \ApiBundle\Components\Request\Group\Put($this->getRequest());
+        $res = new \ApiBundle\Components\Response\Group\Put($req, $this->dataManager);
+        return $res->getResponse($this);
+    }
 }

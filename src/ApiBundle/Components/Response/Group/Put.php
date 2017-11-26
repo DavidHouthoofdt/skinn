@@ -11,10 +11,10 @@
  * License:      2016  http://www.gnu.org/copyleft/lesser.html
  *
  */
-namespace ApiBundle\Components\Response\Language;
+namespace ApiBundle\Components\Response\Group;
 
 /**
- * This file handle the update of the  language
+ * This file handle the update of the group
  *
  * Example usage:
  *
@@ -25,22 +25,22 @@ namespace ApiBundle\Components\Response\Language;
 class Put extends \ApiBundle\Components\Response
 {
     /**
-     * return the languages
+     * update the group
      * 
      * @return array
      */
     public function buildResponse()
     {
-        $language = $this->dm->getById($this->request->get('id'));
-        if (empty($language)) {
-            throw new \Exception('Language not found');
+        $group = $this->dm->getById($this->request->get('id'));
+        if (empty($group)) {
+            throw new \Exception('Group not found');
         }
-        $update = array_merge($language, $this->request->getRequestParams());
+        $update = array_merge($group, $this->request->getRequestParams());
         
         if ($this->dm->updateData($this->request->get('id'), $update)) {
             return $update;
         } else {
-            throw new \Exception('Unable to update the language (i should add the reason why)');
+            throw new \Exception('Unable to update the group (i should add the reason why)');
         }
     }
 }
