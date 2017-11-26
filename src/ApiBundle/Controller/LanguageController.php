@@ -14,9 +14,6 @@
 
 namespace ApiBundle\Controller;
 
-use Exception;
-use Symfony\Component\HttpFoundation\JsonResponse;
-
 /**
  * This is the restfull controller for the languages
  *

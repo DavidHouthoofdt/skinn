@@ -73,4 +73,11 @@ class GroupController extends AbstractController
         $res = new \ApiBundle\Components\Response\Group\File\Get($req, $this->dataManager, $this->fileManager);
         return $res->getResponse($this);
     }
+    
+    public function postAction()
+    {
+        $req = new \ApiBundle\Components\Request\Group\Post($this->getRequest());
+        $res = new \ApiBundle\Components\Response\Group\Post($req, $this->dataManager);
+        return $res->getResponse($this);
+    }
 }
