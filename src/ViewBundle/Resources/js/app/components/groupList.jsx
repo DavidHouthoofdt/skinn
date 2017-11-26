@@ -75,9 +75,11 @@ class GroupList extends Component {
         <div className="group-overview">
             <div className="group-list">
                {groups}
+               <hr />
             </div>
             <div className="group-detail">
                 <GroupDetail group={this.state.activeGroup} />
+                <hr />
             </div>
         </div>
     );
