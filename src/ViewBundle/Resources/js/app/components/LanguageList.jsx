@@ -62,7 +62,7 @@ class LanguageList extends Component {
           this.selectLanguage(language);
         };
         return (
-          <div className="languageItem" onClick={selectLanguage.bind(this)}>
+          <div className="languageItem" key={'language-' + language.id} onClick={selectLanguage.bind(this)}>
             {language.name}
           </div>
         );

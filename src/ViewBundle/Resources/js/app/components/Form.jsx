@@ -16,11 +16,7 @@ class Form extends Component {
   initialData: ?Object;
   
   constructor(props: Props) {
-    super(props);
-    //this.fields = CRUDStore.getSchema();
-    /*if ('recordId' in this.props) {
-      this.initialData = CRUDStore.getRecord(this.props.recordId);
-    }*/
+    super(props);   
   }
   
   getData(): Object {

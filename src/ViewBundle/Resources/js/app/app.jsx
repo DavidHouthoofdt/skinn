@@ -2,8 +2,8 @@
 
 import ReactDOM from 'react-dom';
 import React from 'react';
-import GroupList from './components/groupList';
-import LanguageList from './components/languageList';
+import GroupList from './components/GroupList';
+import LanguageList from './components/LanguageList';
 
 ReactDOM.render(
     <div>
