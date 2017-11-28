@@ -1,6 +1,8 @@
 /* @flow */
 
 import React, {Component} from 'react';
+import CRUDLanguage from '../flux/CRUDLanguage';
+var _ = require('lodash');
 
 type FormInputFieldType = 'text' | 'input';
 
@@ -12,7 +14,8 @@ export type FormInputField = {
   id?: string,
   options?: Array<string>,
   label?: string,
-  hasLanguageData ?: boolean
+  hasLanguageData ?: boolean,
+  value: string
 };
 
 class FormInput extends Component {
@@ -21,6 +24,7 @@ class FormInput extends Component {
 
   static defaultProps = {
     type: 'input',
+    value: ''
   };
 
   getValue(): FormInputFieldValue {
@@ -29,17 +33,57 @@ class FormInput extends Component {
       : this.refs.input.getValue();
   }
 
-  render() {
+  renderField(props: Object)
+  {
     const common: Object = {
-      id: this.props.id,
+      id: props.id,
       ref: 'input',
-      defaultValue: this.props.defaultValue,
+      defaultValue: props.defaultValue,
+      hidden: props.hidden
     };
     switch (this.props.type) {
       case 'text':
         return <textarea {...common} />;
       default:
         return <input {...common} type="text" />;
+    }
+  }
+
+  render() {
+    if (this.props.hasLanguageData === true) {
+      let languages = CRUDLanguage.getLanguages();
+      var self = this;
+      return <div>
+        <table>
+          <thead>
+            <tr>{_.map(languages, function(language) { return <th>{language.name}</th>})}</tr>
+          </thead>
+          <tbody>
+            <tr>
+              {
+                _.map(languages, function(language) {
+                  let value =  (typeof self.props.defaultValue[language.id] !== 'undefined') ?
+                      self.props.defaultValue[language.id] :
+                      '';
+                  let props = {
+                    id: self.props.id,
+                    ref: self.props.ref,
+                    value: value,
+                    defaultValue: value,
+                    type: self.props.type,
+                    options: self.props.options,
+                    hasLanguageData: false,
+                    label: self.props.label
+                  }
+                  return <td>{self.renderField(props)}</td>
+                })
+              }
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    } else {
+      return this.renderField(this.props);
     }
   }
 }
