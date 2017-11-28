@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 
+import CRUDLanguage from '../flux/CRUDLanguage';
 import React, {Component} from 'react';
 
 class LanguageList extends Component {
@@ -9,55 +10,33 @@ class LanguageList extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        languages: [],
-        activeLanguage: null
+        languages: CRUDLanguage.getLanguages(),
+        activeLanguage: CRUDLanguage.getActiveLanguage()
       };
+
+      CRUDLanguage.addListener('change', () => {
+        this.setState({
+          languages: CRUDLanguage.getLanguages(),
+          activeLanguage: CRUDLanguage.getActiveLanguage()
+        });
+      });
     }
 
-    componentDidMount() {
-      this.loadLanguages();
-    }
 
     componentWillUnmount() {
       this.abort();
     }
 
-    loadLanguages() {
-        $.ajax({
-          url: '/api/languages',
-          dataType: 'json'
-        }).success(
-          function (data) {
-            var firstLang = null;
-            for (var i in data) {
-                firstLang = data[i];
-                break;
-            }
-            console.log(firstLang);
-            this.setState({languages: data, activeLanguage: firstLang});
-          }.bind(this)
-        ).error(
-          function (jqXHR) {
-            if (jqXHR.statusText !== 'abort') {
-              throw new Error('Failed to load language data.');
-            }
-          }.bind(this)
-        );
+    selectLanguage(language) {
+      CRUDLanguage.setActiveLanguage(language);
     }
 
-  selectLanguage(language) {
-    this.setState({
-        activeLanguage : language
-    });
-  }
-
-  /**
-   * Renders all assets
-   *
-   * @returns {XML}
-   */
-  renderLanguages() {
-    return _.map(this.state.languages, function(language) {
+    /**
+     * Renders all languages
+     *
+     */
+    renderLanguages() {
+      return _.map(this.state.languages, function(language) {
         var selectLanguage = function() {
           this.selectLanguage(language);
         };
@@ -66,23 +45,23 @@ class LanguageList extends Component {
             {language.name}
           </div>
         );
-    }.bind(this));
-  }
+      }.bind(this));
+    }
 
 
-  render() {
-    let languages = this.renderLanguages();
-    return (
-        <div className="language-list">
-           {languages}
-           <hr />
-           {this.state.activeLanguage !== null &&
-                <span>Active Language : {this.state.activeLanguage.name}<hr /></span>
-                
-            }
-        </div>
-    );
-  }
+    render() {
+      let languages = this.renderLanguages();
+      return (
+          <div className="language-list">
+             {languages}
+             <hr />
+             {this.state.activeLanguage !== null &&
+                  <span>Active Language : {this.state.activeLanguage.name}<hr /></span>
+
+              }
+          </div>
+      );
+    }
 }
 
 export default LanguageList;
