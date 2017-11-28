@@ -25,7 +25,7 @@ const CRUDLanguage = {
         }
         activeLanguage = firstLang;
         languages = data;
-        emitter.emit('change');
+        emitter.emit('languages-loaded');
       }.bind(this)
     ).error(
       function (jqXHR) {
@@ -57,7 +57,7 @@ const CRUDLanguage = {
     emitter.emit('change');
     return true;
   },
-  
+
   addListener(eventType: string, fn: Function) {
     emitter.addListener(eventType, fn);
   },

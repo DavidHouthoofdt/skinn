@@ -5,20 +5,22 @@ var _ = require('lodash');
 import React, {Component} from 'react';
 import GroupDetail from './GroupDetail';
 
+import CRUDGroup from '../flux/CRUDGroup';
+
 class GroupList extends Component {
 
     constructor(props) {
       super(props);
       this.state = {
-        groups: [],
-        allGroups: [],
-        search: '',
+        groups: CRUDGroup.getGroups(),
         activeGroup: null
       };
-    }
 
-    componentDidMount() {
-      this.loadGroupList();
+      CRUDGroup.addListener('groups-loaded', () => {
+        this.setState({
+          groups: CRUDGroup.getGroups()
+        });
+      });
     }
 
     componentWillUnmount() {
@@ -26,27 +28,9 @@ class GroupList extends Component {
     }
 
 
-    loadGroupList() {
-      $.ajax({
-        url: '/api/groups',
-        dataType: 'json'
-      }).success(
-        function (data) {
-          this.setState({groups: data, allGroups:data});
-        }.bind(this)
-      ).error(
-        function (jqXHR) {
-          if (jqXHR.statusText !== 'abort') {
-            throw new Error('Failed to load group data.');
-          }
-        }.bind(this)
-      );
-    }
-
     groupSelected(group) {
-      this.setState({
-          activeGroup : group
-      });
+      this.setState({activeGroup : group});
+      CRUDGroup.setActiveGroup(group);
     }
 
     /**
