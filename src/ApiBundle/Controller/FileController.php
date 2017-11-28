@@ -54,4 +54,18 @@ class FileController extends AbstractController
         $res = new \ApiBundle\Components\Response\File\Cget($req, $this->dataManager);
         return $res->getResponse($this);
     }
+
+    /**
+     * Update the file
+     *
+     * @param int $id the file id
+     * 
+     * @return type
+     */
+    public function putAction($id)
+    {
+        $req = new \ApiBundle\Components\Request\File\Put($this->getRequest());
+        $res = new \ApiBundle\Components\Response\File\Put($req, $this->dataManager);
+        return $res->getResponse($this);
+    }
 }
