@@ -31,7 +31,7 @@ class Post extends \ApiBundle\Components\Response
      */
     public function buildResponse()
     {
-        $newFile = ['name' => $this->request->get('name')];
+        $newFile = $this->request->getRequestParams();
         if ($this->dm->insertData($newFile)) {
             return $newFile;
         } else {
