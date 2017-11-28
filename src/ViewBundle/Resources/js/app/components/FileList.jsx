@@ -20,12 +20,14 @@ class FileList extends Component {
           activeFile: null
         })
       });
-      CRUDFile.addListener('files-updated', () => {
+      CRUDFile.addListener('file-updated', () => {
+        console.log(CRUDFile.getFiles());
         this.setState({
           files: CRUDFile.getFiles(),
+          activeFile: null
         })
       });
-      CRUDFile.addListener('files-created', () => {
+      CRUDFile.addListener('file-created', () => {
         this.setState({
           files: CRUDFile.getFiles(),
         })

@@ -54,6 +54,7 @@ const CRUDFile = {
   addListener(eventType: string, fn: Function) {
     emitter.addListener(eventType, fn);
   },
+  
   createFile(file: Object) {
     $.ajax({
       url: '/api/files',
