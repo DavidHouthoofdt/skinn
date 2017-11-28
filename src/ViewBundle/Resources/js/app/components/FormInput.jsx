@@ -56,18 +56,21 @@ class FormInput extends Component {
       id: props.id,
       ref: (typeof props.ref === 'undefined' || props.ref  === '') ? 'input' : props.ref,
       defaultValue: props.defaultValue,
-      hidden: props.hidden
     };
+    var inputType = props.type === 'hidden' ? 'hidden' : 'text';
     switch (this.props.type) {
       case 'text':
         return <textarea {...common} />;
       default:
-        return <input {...common} type="text" />;
+        return <input {...common} type={inputType} />;
     }
   }
 
   render() {
-    if (this.props.hasLanguageData === true) {
+
+    if (this.props.type === 'hidden') {
+      return this.renderField(this.props);
+    } else if (this.props.hasLanguageData === true) {
       let languages = CRUDLanguage.getLanguages();
       var self = this;
       return <div>
@@ -79,7 +82,7 @@ class FormInput extends Component {
             <tr>
               {
                 _.map(languages, function(language) {
-                  let value =  (typeof self.props.defaultValue[language.id] !== 'undefined') ?
+                  let value =  (typeof self.props.defaultValue !== 'undefined' && self.props.defaultValue[language.id] !== 'undefined') ?
                       self.props.defaultValue[language.id] :
                       '';
 

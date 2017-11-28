@@ -12,7 +12,7 @@ class GroupList extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        groups: CRUDGroup.getGroups(),
+        groups: null,
         activeGroup: null
       };
 
@@ -54,21 +54,27 @@ class GroupList extends Component {
 
     render() {
         let groups = this.renderGroups();
-        return (
-            <div className="group-overview">
-                <div className="group-list">
-                   {groups}
-                   <hr />
-                </div>
-                <div className="group-detail">
-                {this.state.activeGroup !== null &&
-                    <span>Active group : {this.state.activeGroup.name}<hr /></span>
-                }
-                    <GroupDetail group={this.state.activeGroup} />
-                    <hr />
-                </div>
-            </div>
-        );
+        if (this.state.groups === null) {
+          return <div>Loading groups ...</div>;
+        } else {
+          return (
+              <div className="group-overview">
+                  <div className="group-list">
+                     {groups}
+                     <hr />
+                  </div>
+                  <div className="group-detail">
+                  {this.state.activeGroup !== null &&
+                      <div>
+                        <span>Active group : {this.state.activeGroup.name}<hr /></span>
+                        <GroupDetail group={this.state.activeGroup} />
+                      </div>
+                  }
+
+                  </div>
+              </div>
+          );
+        }
     }
 }
 

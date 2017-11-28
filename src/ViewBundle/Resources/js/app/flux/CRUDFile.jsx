@@ -54,6 +54,25 @@ const CRUDFile = {
   addListener(eventType: string, fn: Function) {
     emitter.addListener(eventType, fn);
   },
+  createFile(file: Object) {
+    $.ajax({
+      url: '/api/files',
+      data: file,
+      type: 'POST',
+      dataType: 'json',
+    }).success(
+      function (data) {
+        files[data.id] = data;
+        emitter.emit('file-created');
+      }.bind(this)
+    ).error(
+      function (jqXHR) {
+        if (jqXHR.statusText !== 'abort') {
+          throw new Error('Failed to create the file data.');
+        }
+      }.bind(this)
+    );
+  },
 
   updateFile(id: number, file: Object) {
     $.ajax({
@@ -78,16 +97,16 @@ const CRUDFile = {
   /**
    * Get the form fields for the file edit
    */
-  getFormFields() {
+  getFormFields(newForm) {
     return [
       {
-        type: '',
+        type: (newForm) ? 'hidden': '',
         value: activeFile === null ? '' : activeFile.id,
-        label: 'Id',
+        label: (newForm) ? '' : 'Id',
         hasLanguageData: false,
         readonly: true,
         id: 'id',
-        multiple: false
+        multiple: false,
       },
       {
         type: '',
@@ -96,7 +115,7 @@ const CRUDFile = {
         hasLanguageData: false,
         readonly: false,
         id: 'name',
-        multiple: false
+        multiple: false,
       },
       {
         type: 'text',
@@ -104,7 +123,7 @@ const CRUDFile = {
         label: 'Description',
         hasLanguageData: true,
         id: 'descriptions',
-        multiple: false
+        multiple: false,
       },
       {
         type: 'multi_csv',
@@ -112,7 +131,7 @@ const CRUDFile = {
         label: 'Tags',
         hasLanguageData: true,
         id: 'tags',
-        multiple: true
+        multiple: true,
       },
       {
         type: 'Group',
@@ -120,7 +139,7 @@ const CRUDFile = {
         label: 'Group',
         hasLanguageData: false,
         id: 'group_id',
-        multiple: false
+        multiple: false,
       }
     ]
   },

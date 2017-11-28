@@ -10,7 +10,7 @@ class LanguageList extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        languages: CRUDLanguage.getLanguages(),
+        languages: null,
         activeLanguage: CRUDLanguage.getActiveLanguage()
       };
 
@@ -54,16 +54,20 @@ class LanguageList extends Component {
 
     render() {
       let languages = this.renderLanguages();
-      return (
-          <div className="language-list">
-             {languages}
-             <hr />
-             {this.state.activeLanguage !== null &&
-                  <span>Active Language : {this.state.activeLanguage.name}<hr /></span>
+      if (this.state.languages === null) {
+        return <div>Loading languages...</div>;
+      } else {
+        return (
+            <div className="language-list">
+               {languages}
+               <hr />
+               {this.state.activeLanguage !== null &&
+                    <span>Active Language : {this.state.activeLanguage.name}<hr /></span>
 
-              }
-          </div>
-      );
+                }
+            </div>
+        );
+      }
     }
 }
 

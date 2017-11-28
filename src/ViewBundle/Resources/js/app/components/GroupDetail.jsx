@@ -16,14 +16,14 @@ class GroupDetail extends Component {
 
 
     render() {
-        if (typeof this.props.group == 'undefined' || this.props.group === null) {
-            return <div>Select a group</div>;
-        } else {
+        if (typeof this.props.group !== 'undefined' && this.props.group !== null) {
             return (
                 <div>
                     <div className="group-files"><FileList group={this.props.group} /></div>
                 </div>
             );
+        } else {
+          return null;
         }
     }
 }
