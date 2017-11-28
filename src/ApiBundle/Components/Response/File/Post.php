@@ -33,7 +33,7 @@ class Post extends \ApiBundle\Components\Response
     {
         $newFile = ['name' => $this->request->get('name')];
         if ($this->dm->insertData($newFile)) {
-            return $newGroup;
+            return $newFile;
         } else {
             throw new \Exception('Unable to create the new file (i should add the reason why)');
         }
