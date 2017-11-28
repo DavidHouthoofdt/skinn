@@ -53,6 +53,7 @@ class Dialog extends Component {
             </Button>
           </div>
         </div>
+        <hr />
       </div>
     );
   }

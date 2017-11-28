@@ -28,29 +28,33 @@ class Form extends Component {
 
   render() {
     return (
-      <form className="Form">{this.props.fields.map((field: FormInputField) => {
-        const prefilled: FormInputFieldValue = field.value;
-        if (!this.props.readonly) {
+      <div className="form-holder">
+        <form className="Form">{this.props.fields.map((field: FormInputField) => {
+          const prefilled: FormInputFieldValue = field.value;
+          if (!this.props.readonly) {
+            return (
+              <div className="FormRow" key={field.id}>
+              {field.type !== 'hidden' &&
+                  <label className="FormLabel" htmlFor={field.id}>{field.label}:</label>
+              }
+                <FormInput ref={field.id} {...field}  defaultValue={prefilled} />
+              </div>
+            );
+          }
+          if (!prefilled) {
+            return null;
+          }
           return (
             <div className="FormRow" key={field.id}>
-            {field.type !== 'hidden' &&
-                <label className="FormLabel" htmlFor={field.id}>{field.label}:</label>
-            }
-              <FormInput ref={field.id} {...field}  defaultValue={prefilled} />
+              <span className="FormLabel">{field.label}:</span>
+              <div>{prefilled}</div>
+
             </div>
           );
-        }
-        if (!prefilled) {
-          return null;
-        }
-        return (
-          <div className="FormRow" key={field.id}>
-            <span className="FormLabel">{field.label}:</span>
-            <div>{prefilled}</div>
-
-          </div>
-        );
-      }, this)}<hr /></form>
+        }, this)}
+          </form>
+        <hr />
+      </div>
     );
   }
 }
