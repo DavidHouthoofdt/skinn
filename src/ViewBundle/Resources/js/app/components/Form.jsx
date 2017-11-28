@@ -7,30 +7,20 @@ import type {FormInputField, FormInputFieldValue} from './FormInput';
 
 type Props = {
   readonly?: boolean,
-  recordId: ?number,
+  fields: Array<Object>,
+  record: Object
 };
 
 class Form extends Component {
-  
-  fields: Array<Object>;
-  initialData: ?Object;
-  
+
   constructor(props: Props) {
-    super(props);   
+    super(props);
   }
-  
-  getData(): Object {
-    let data: Object = {};
-    this.fields.forEach((field: FormInputField) => 
-      data[field.id] = this.refs[field.id].getValue()
-    );
-    return data;
-  }
-  
+
   render() {
     return (
-      <form className="Form">{this.fields.map((field: FormInputField) => {
-        const prefilled: FormInputFieldValue = (this.initialData && this.initialData[field.id]) || '';
+      <form className="Form">{this.props.fields.map((field: FormInputField) => {
+        const prefilled: FormInputFieldValue = field.value;
         if (!this.props.readonly) {
           return (
             <div className="FormRow" key={field.id}>
@@ -46,7 +36,7 @@ class Form extends Component {
           <div className="FormRow" key={field.id}>
             <span className="FormLabel">{field.label}:</span>
             <div>{prefilled}</div>
-            
+
           </div>
         );
       }, this)}</form>

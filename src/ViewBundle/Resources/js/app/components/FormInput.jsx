@@ -12,16 +12,17 @@ export type FormInputField = {
   id?: string,
   options?: Array<string>,
   label?: string,
+  hasLanguageData ?: boolean
 };
 
 class FormInput extends Component {
-  
+
   props: FormInputField;
-  
+
   static defaultProps = {
     type: 'input',
   };
-    
+
   getValue(): FormInputFieldValue {
     return 'value' in this.refs.input
       ? this.refs.input.value
