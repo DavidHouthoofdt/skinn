@@ -45,7 +45,24 @@ class CRUD extends Component {
       }
       this.props.CRUDObject.createObject(this.refs.form.getData());
     }
-
+    
+    renderCreateFormDialog(formFields) 
+    {
+        return (
+          <Dialog
+            modal={true}
+            header={'Add item'}
+            confirmLabel={'Add'}
+            hasCancel={true}
+            onAction={this._createDataDialog.bind(this)}
+          >
+            <Form
+              ref="form"
+              fields={formFields}
+              readonly={false} />
+          </Dialog>
+        );
+    }
 
     _renderDialog() {
         if (!this.state.dialog) {

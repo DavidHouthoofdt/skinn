@@ -20,6 +20,13 @@ class LanguageList extends CRUD {
         activeLanguage: CRUDLanguage.getActiveLanguage()
       };
 
+      CRUDLanguage.addListener('language-created', () => {
+        this.setState({
+          languages: CRUDLanguage.getLanguages(),
+          activeLanguage: CRUDLanguage.getActiveLanguage()
+        })
+      });
+
       CRUDLanguage.addListener('languages-loaded', () => {
         this.setState({
           languages: CRUDLanguage.getLanguages(),
@@ -28,6 +35,14 @@ class LanguageList extends CRUD {
       });
     }
 
+    /**
+     * override the create form
+     */
+    _renderCreateFormDialog() {
+        this.props.CRUDObject.setActiveLanguage(null);
+        var formFields = this.props.CRUDObject.getFormFields(true);
+        return this.renderCreateFormDialog(formFields);
+    }
 
     componentWillUnmount() {
       this.abort();
