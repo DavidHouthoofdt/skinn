@@ -14,7 +14,7 @@ class LanguageList extends Component {
         activeLanguage: CRUDLanguage.getActiveLanguage()
       };
 
-      CRUDLanguage.addListener('change', () => {
+      CRUDLanguage.addListener('languages-loaded', () => {
         this.setState({
           languages: CRUDLanguage.getLanguages(),
           activeLanguage: CRUDLanguage.getActiveLanguage()
@@ -28,6 +28,9 @@ class LanguageList extends Component {
     }
 
     selectLanguage(language) {
+      this.setState({
+          activeLanguage : language
+      });
       CRUDLanguage.setActiveLanguage(language);
     }
 

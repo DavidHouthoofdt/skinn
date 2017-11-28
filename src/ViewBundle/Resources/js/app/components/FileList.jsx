@@ -6,68 +6,38 @@ import React, {Component} from 'react';
 import Dialog from './Dialog';
 import Form from './Form';
 import Actions from './Actions';
+import CRUDFile from '../flux/CRUDFile';
 
 class FileList extends Component {
 
     constructor(props) {
       super(props);
+      CRUDFile.loadGroupFiles(props.group.id);
+      CRUDFile.addListener('files-loaded', () => {
+        this.setState({
+          files: CRUDFile.getFiles(),
+          activeFile: null
+        })
+      });
       this.state = {
-        files: [],
-        allFiles: [],
-        search: '',
+        files : [],
         activeFile: null
-      };
-      this.loadGroupFiles(props.group);
+      }
     }
 
     componentWillReceiveProps (props) {
-        this.loadGroupFiles(props.group);
+      CRUDFile.loadGroupFiles(props.group.id)
     }
-    
+
     componentWillUnmount() {
       this.abort();
     }
 
-    loadGroupFiles(group) {
-        if (group === null) {
-            return;
-        }
-        $.ajax({
-            url: '/api/groups/' + group.id + '/files.json',
-            dataType: 'json'
-        }).success(
-            function (data) {
-                this.setState({files: data});
-            }.bind(this)
-        ).error(
-            function (jqXHR) {
-                if (jqXHR.statusText !== 'abort') {
-                throw new Error('Failed to load group data.');
-                }
-            }.bind(this)
-        );
-    }
-
-    renderFileList() 
-    {
-        var self = this;
-        return _.map(this.state.files, function(file) {
-            var selectFile = function() {
-                self.fileSelect(file);
-            };
-            return (
-                <li onClick={selectFile} key={'file-' + file.id}>
-                    {file.name}
-                    <Actions onAction={self.actionClick.bind(self, file)} />
-                </li>
-            )
-        });
-    }
-
     fileSelect(file) {
       this.setState({
-          activeFile : file
+        activeFile : file
       });
+      CRUDFile.setActiveFile(file);
     }
 
     actionClick(file: Object, action: string) {
@@ -106,24 +76,29 @@ class FileList extends Component {
         }
     }
 
-
+    /*
+     * Render the delete dialog
+     */
     _renderDeleteDialog() {
       return (
-        <Dialog 
+        <Dialog
           modal={true}
           header="Confirm deletion"
           confirmLabel="Delete"
           onAction={this._deleteConfirmationClick.bind(this)}
         >
-          {`Are you sure you want to delete "{this.state.file.name}"?`}
+          {'Are you sure you want to delete "{this.state.file.name}"?'}
         </Dialog>
       );
     }
 
+    /**
+     * Render the form dialog
+     */
     _renderFormDialog(readonly: ?boolean) {
         console.log('renderFormDialog');
         return (
-          <Dialog 
+          <Dialog
             modal={true}
             header={readonly ? 'Item info' : 'Edit item'}
             confirmLabel={readonly ? 'ok' : 'Save'}
@@ -133,12 +108,36 @@ class FileList extends Component {
             <Form
               ref="form"
               record={this.state.dialog.record}
+              fields={CRUDFile.getFormFields()}
               readonly={!!readonly} />
           </Dialog>
-        ); 
+        );
     }
 
- 
+
+
+    /**
+     * Render file overview
+     */
+    renderFileList()
+    {
+        var self = this;
+        return _.map(this.state.files, function(file) {
+            var selectFile = function() {
+                self.fileSelect(file);
+            };
+            return (
+                <li onClick={selectFile} key={'file-' + file.id}>
+                    {file.name}
+                    <Actions onAction={self.actionClick.bind(self, file)} />
+                </li>
+            )
+        });
+    }
+
+    /**
+     * Render the file overview
+     */
     render() {
         let files = this.renderFileList();
         if (this.state.files.length === 0) {
