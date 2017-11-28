@@ -83,6 +83,30 @@ class FileList extends CRUD {
     }
 
     /**
+     * override the create form (need to set the group) Render the form dialog
+     */
+    _renderCreateFormDialog() {
+        this.props.CRUDObject.setActiveFile({group_id: this.props.group.id});
+        var formFields = this.props.CRUDObject.getFormFields(true);
+        //set group id to the current group
+        this.props.CRUDObject.setActiveFile(null);
+        return (
+          <Dialog
+            modal={true}
+            header={'Add item'}
+            confirmLabel={'Add'}
+            hasCancel={true}
+            onAction={this._createDataDialog.bind(this)}
+          >
+            <Form
+              ref="form"
+              fields={formFields}
+              readonly={false} />
+          </Dialog>
+        );
+    }
+
+    /**
      * Render the file overview
      */
     render() {

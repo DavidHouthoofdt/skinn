@@ -86,10 +86,7 @@ class CRUD extends Component {
      * Render the form dialog
      */
     _renderCreateFormDialog() {
-        this.props.CRUDObject.setActiveFile({group_id: this.props.group.id});
         var formFields = this.props.CRUDObject.getFormFields(true);
-        //set group id to the current group
-        this.props.CRUDObject.setActiveFile(null);
         return (
           <Dialog
             modal={true}
