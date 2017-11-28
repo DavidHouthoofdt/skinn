@@ -10,8 +10,8 @@ class CRUD extends Component {
       super(props);
     }
 
-    actionClick(file: Object, action: string) {
-        this.setState({dialog: {type: action, record: file}});
+    actionClick(record: Object, action: string) {
+        this.setState({dialog: {type: action, record: record}});
     }
 
     _addNewDialog() {

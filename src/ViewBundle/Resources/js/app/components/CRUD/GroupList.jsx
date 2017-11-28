@@ -5,7 +5,7 @@ var _ = require('lodash');
 import React from 'react';
 import GroupDetail from '../GroupDetail';
 import Button from '../Button';
-
+import Actions from '../Actions';
 import CRUDGroup from '../../flux/CRUDGroup';
 import CRUD from '../CRUD';
 
@@ -26,6 +26,12 @@ class GroupList extends CRUD {
         this.setState({
           groups: CRUDGroup.getGroups(),
           activeGroup: null
+        })
+      });
+
+      CRUDGroup.addListener('group-updated', () => {
+        this.setState({
+          groups: CRUDGroup.getGroups(),
         })
       });
 
@@ -69,6 +75,7 @@ class GroupList extends CRUD {
           return (
             <div className="groupItem" key={'group-' + group.id} onClick={selectGroup.bind(this)}>
               {group.name}
+               <Actions onAction={this.actionClick.bind(this, group)} />
             </div>
           );
       }.bind(this));
@@ -88,6 +95,7 @@ class GroupList extends CRUD {
                       + add group
                     </Button>
                      <hr />
+                      {this._renderDialog()}   
                   </div>
                   <div className="group-detail">
                   {this.state.activeGroup !== null &&
@@ -96,7 +104,7 @@ class GroupList extends CRUD {
                         <GroupDetail group={this.state.activeGroup} />
                       </div>
                   }
-                    {this._renderDialog()}
+                   
                   </div>
               </div>
           );

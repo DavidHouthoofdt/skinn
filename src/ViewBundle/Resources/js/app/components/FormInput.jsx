@@ -21,12 +21,19 @@ export type FormInputField = {
 class FormInput extends Component {
 
   props: FormInputField;
+      static defaultProps = {
+        type: 'input',
+        value: '',
+        ref: 'input'
+      };
 
-  static defaultProps = {
-    type: 'input',
-    value: '',
-    ref: 'input'
-  };
+    constructor(props) {
+        super(props);
+        this.state = {
+          value: props.defaultValue
+        };
+   }
+
 
   getValue(): FormInputFieldValue {
     var value = '';
@@ -49,9 +56,23 @@ class FormInput extends Component {
     }
     return value;
   }
+ 
+   componentWillReceiveProps(nextProps) {
+        this.setState({value: nextProps.value});
+    }
+
+    //re-render when input changes
+    _handleChange(e){
+        this.setState({value: e.target.value});
+    }
+
+  shouldComponentUpdate(nextProps) {
+    return (nextProps !== this.props.id);
+  }
 
   renderField(props: Object)
   {
+
     const common: Object = {
       id: props.id,
       ref: (typeof props.ref === 'undefined' || props.ref  === '') ? 'input' : props.ref,
@@ -60,9 +81,9 @@ class FormInput extends Component {
     var inputType = props.type === 'hidden' ? 'hidden' : 'text';
     switch (this.props.type) {
       case 'text':
-        return <textarea {...common} />;
+        return <textarea {...common} onChange={this._handleChange.bind(this)} value={this.state.value} />;
       default:
-        return <input {...common} type={inputType} />;
+        return <input {...common} value={this.state.value} type={inputType} onChange={this._handleChange.bind(this)} />;
     }
   }
 
