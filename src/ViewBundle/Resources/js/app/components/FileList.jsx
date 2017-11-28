@@ -56,6 +56,8 @@ class FileList extends Component {
       if (action === 'dismiss') {
         return;
       }
+      console.log(this.refs.form.getData());
+      //CRUDActions.updateRecord(index, this.refs.form.getData());
     }
 
     _renderDialog() {
@@ -95,7 +97,6 @@ class FileList extends Component {
      * Render the form dialog
      */
     _renderFormDialog(readonly: ?boolean) {
-        console.log('renderFormDialog');
         return (
           <Dialog
             modal={true}
@@ -112,8 +113,6 @@ class FileList extends Component {
           </Dialog>
         );
     }
-
-
 
     /**
      * Render file overview

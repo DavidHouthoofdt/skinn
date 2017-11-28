@@ -56,7 +56,7 @@ class FormInput extends Component {
       return <div>
         <table>
           <thead>
-            <tr>{_.map(languages, function(language) { return <th>{language.name}</th>})}</tr>
+            <tr>{_.map(languages, function(language) { return <th key={'th-language-' + language.id}>{language.name}</th>})}</tr>
           </thead>
           <tbody>
             <tr>
@@ -79,7 +79,7 @@ class FormInput extends Component {
                     hasLanguageData: false,
                     label: self.props.label
                   }
-                  return <td>{self.renderField(props)}</td>
+                  return <td key={'td-language-' + language.id + '-' + self.props.id}>{self.renderField(props)}</td>
                 })
               }
             </tr>

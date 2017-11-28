@@ -17,6 +17,16 @@ class Form extends Component {
     super(props);
   }
 
+  getData(): Object {
+    let data: Object = {};
+    var self = this;
+    console.log(this.refs);
+    this.props.fields.map((field: FormInputField) => {
+      data[field.id] = self.refs[field.id].getValue();
+    });
+    return data;
+  }
+
   render() {
     return (
       <form className="Form">{this.props.fields.map((field: FormInputField) => {
@@ -25,7 +35,7 @@ class Form extends Component {
           return (
             <div className="FormRow" key={field.id}>
               <label className="FormLabel" htmlFor={field.id}>{field.label}:</label>
-              <FormInput {...field} ref={field.id} defaultValue={prefilled} />
+              <FormInput ref={field.id} {...field}  defaultValue={prefilled} />
             </div>
           );
         }
