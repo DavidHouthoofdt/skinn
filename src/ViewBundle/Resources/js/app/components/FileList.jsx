@@ -19,6 +19,11 @@ class FileList extends Component {
           activeFile: null
         })
       });
+      CRUDFile.addListener('files-updated', () => {
+        this.setState({
+          files: CRUDFile.getFiles(),
+        })
+      });
       this.state = {
         files : [],
         activeFile: null
@@ -56,8 +61,7 @@ class FileList extends Component {
       if (action === 'dismiss') {
         return;
       }
-      console.log(this.refs.form.getData());
-      //CRUDActions.updateRecord(index, this.refs.form.getData());
+      CRUDFile.updateFile(this.state.dialog.record.id, this.refs.form.getData());
     }
 
     _renderDialog() {

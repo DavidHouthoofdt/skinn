@@ -55,6 +55,26 @@ const CRUDFile = {
     emitter.addListener(eventType, fn);
   },
 
+  updateFile(id: number, file: Object) {
+    $.ajax({
+      url: '/api/files/' + id,
+      data: file,
+      type: 'PUT',
+      dataType: 'json',
+    }).success(
+      function (data) {
+        files[id] = data;
+        emitter.emit('file-updated');
+      }.bind(this)
+    ).error(
+      function (jqXHR) {
+        if (jqXHR.statusText !== 'abort') {
+          throw new Error('Failed to update the file data.');
+        }
+      }.bind(this)
+    );
+  },
+
   /**
    * Get the form fields for the file edit
    */
@@ -67,6 +87,15 @@ const CRUDFile = {
         hasLanguageData: false,
         readonly: true,
         id: 'id',
+        multiple: false
+      },
+      {
+        type: '',
+        value: activeFile === null ? '' : activeFile.name,
+        label: 'Name',
+        hasLanguageData: false,
+        readonly: false,
+        id: 'name',
         multiple: false
       },
       {
