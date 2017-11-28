@@ -65,6 +65,10 @@ class FormInput extends Component {
                   let value =  (typeof self.props.defaultValue[language.id] !== 'undefined') ?
                       self.props.defaultValue[language.id] :
                       '';
+
+                  if (value instanceof Object) {
+                    value = _.map(value, function(tag) { return tag}).join(';');
+                  }
                   let props = {
                     id: self.props.id,
                     ref: self.props.ref,

@@ -49,7 +49,6 @@ class FileList extends Component {
       if (action === 'dismiss') {
         return;
       }
-
     }
 
     _saveDataDialog(action: string) {
