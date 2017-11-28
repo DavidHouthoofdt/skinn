@@ -81,15 +81,14 @@ class LanguageList extends CRUD {
         return (
             <div className="language-list">
                {languages}
+                <Button
+                  onClick={this._addNewDialog.bind(this)}>
+                  + add language
+                </Button>
                <hr />
                {this.state.activeLanguage !== null &&
                     <span>Active Language : {this.state.activeLanguage.name}<hr /></span>
                 }
-              <Button
-                  onClick={this._addNewDialog.bind(this)}>
-                  + add language
-              </Button>
-
               {this._renderDialog()}
             </div>
         );

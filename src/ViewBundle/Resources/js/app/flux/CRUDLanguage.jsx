@@ -36,10 +36,10 @@ const CRUDLanguage = {
     );
   },
 
-  createObject(file: Object) {
+  createObject(language: Object) {
     $.ajax({
       url: '/api/languages',
-      data: file,
+      data: language,
       type: 'POST',
       dataType: 'json',
     }).success(
@@ -56,10 +56,10 @@ const CRUDLanguage = {
     );
   },
 
-  updateObject(id: number, file: Object) {
+  updateObject(id: number, language: Object) {
     $.ajax({
       url: '/api/languages/' + id,
-      data: file,
+      data: language,
       type: 'PUT',
       dataType: 'json',
     }).success(
@@ -104,7 +104,7 @@ const CRUDLanguage = {
 
 
   /**
-   * Get the form fields for the file edit
+   * Get the form fields for the language edit
    */
   getFormFields(newForm) {
     return [

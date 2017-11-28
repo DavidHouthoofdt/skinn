@@ -2,12 +2,18 @@
 
 var _ = require('lodash');
 
-import React, {Component} from 'react';
-import GroupDetail from './GroupDetail';
+import React from 'react';
+import GroupDetail from '../GroupDetail';
+import Button from '../Button';
 
-import CRUDGroup from '../flux/CRUDGroup';
+import CRUDGroup from '../../flux/CRUDGroup';
+import CRUD from '../CRUD';
 
-class GroupList extends Component {
+class GroupList extends CRUD {
+    
+    static defaultProps = Object.assign({}, CRUD.defaultProps, {
+      CRUDObject: CRUDGroup
+    });
 
     constructor(props) {
       super(props);
@@ -15,6 +21,13 @@ class GroupList extends Component {
         groups: null,
         activeGroup: null
       };
+
+      CRUDGroup.addListener('group-created', () => {
+        this.setState({
+          groups: CRUDGroup.getGroups(),
+          activeGroup: null
+        })
+      });
 
       CRUDGroup.addListener('groups-loaded', () => {
         this.setState({
@@ -31,6 +44,15 @@ class GroupList extends Component {
     groupSelected(group) {
       this.setState({activeGroup : group});
       CRUDGroup.setActiveGroup(group);
+    }
+
+    /**
+     * override the create form
+     */
+    _renderCreateFormDialog() {
+        this.props.CRUDObject.setActiveGroup(null);
+        var formFields = this.props.CRUDObject.getFormFields(true);
+        return this.renderCreateFormDialog(formFields);
     }
 
     /**
@@ -61,6 +83,10 @@ class GroupList extends Component {
               <div className="group-overview">
                   <div className="group-list">
                      {groups}
+                    <Button
+                      onClick={this._addNewDialog.bind(this)}>
+                      + add group
+                    </Button>
                      <hr />
                   </div>
                   <div className="group-detail">
@@ -70,7 +96,7 @@ class GroupList extends Component {
                         <GroupDetail group={this.state.activeGroup} />
                       </div>
                   }
-
+                    {this._renderDialog()}
                   </div>
               </div>
           );
