@@ -33,7 +33,9 @@ class Form extends Component {
         if (!this.props.readonly) {
           return (
             <div className="FormRow" key={field.id}>
-              <label className="FormLabel" htmlFor={field.id}>{field.label}:</label>
+            {field.type !== 'hidden' &&
+                <label className="FormLabel" htmlFor={field.id}>{field.label}:</label>
+            }
               <FormInput ref={field.id} {...field}  defaultValue={prefilled} />
             </div>
           );
@@ -48,7 +50,7 @@ class Form extends Component {
 
           </div>
         );
-      }, this)}</form>
+      }, this)}<hr /></form>
     );
   }
 }
