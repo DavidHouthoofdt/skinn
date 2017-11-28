@@ -66,28 +66,32 @@ const CRUDFile = {
         label: 'Id',
         hasLanguageData: false,
         readonly: true,
-        id: 'id'
+        id: 'id',
+        multiple: false
       },
       {
         type: 'text',
         value: activeFile === null ? '' : activeFile.descriptions,
         label: 'Description',
         hasLanguageData: true,
-        id: 'descriptions'
+        id: 'descriptions',
+        multiple: false
       },
       {
         type: 'multi_csv',
         value: activeFile === null ? '' : activeFile.tags,
         label: 'Tags',
         hasLanguageData: true,
-        id: 'tags'
+        id: 'tags',
+        multiple: true
       },
       {
         type: 'Group',
         value: activeFile === null ? '' : activeFile.group_id,
         label: 'Group',
         hasLanguageData: false,
-        id: 'group_id'
+        id: 'group_id',
+        multiple: false
       }
     ]
   },

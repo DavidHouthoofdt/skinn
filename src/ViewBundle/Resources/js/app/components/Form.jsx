@@ -20,7 +20,6 @@ class Form extends Component {
   getData(): Object {
     let data: Object = {};
     var self = this;
-    console.log(this.refs);
     this.props.fields.map((field: FormInputField) => {
       data[field.id] = self.refs[field.id].getValue();
     });

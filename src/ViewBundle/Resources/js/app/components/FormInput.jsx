@@ -24,20 +24,37 @@ class FormInput extends Component {
 
   static defaultProps = {
     type: 'input',
-    value: ''
+    value: '',
+    ref: 'input'
   };
 
   getValue(): FormInputFieldValue {
-    return 'value' in this.refs.input
-      ? this.refs.input.value
-      : this.refs.input.getValue();
+    var value = '';
+    var self = this;
+    if (this.props.hasLanguageData === true) {
+      value = {};
+      let languages = CRUDLanguage.getLanguages();
+      _.map(languages, function(language) {
+        let curValue = self.refs['input-' + language.id].value;
+        if (self.props.multiple) {
+          curValue = curValue.split(';');
+        }
+        value[language.id] = curValue;
+      });
+    } else {
+      value = this.refs.input.value;
+      if (this.props.multiple) {
+        value = value.split(';');
+      }
+    }
+    return value;
   }
 
   renderField(props: Object)
   {
     const common: Object = {
       id: props.id,
-      ref: 'input',
+      ref: (typeof props.ref === 'undefined' || props.ref  === '') ? 'input' : props.ref,
       defaultValue: props.defaultValue,
       hidden: props.hidden
     };
@@ -71,12 +88,13 @@ class FormInput extends Component {
                   }
                   let props = {
                     id: self.props.id,
-                    ref: self.props.ref,
+                    ref: 'input-' + language.id,
                     value: value,
                     defaultValue: value,
                     type: self.props.type,
                     options: self.props.options,
                     hasLanguageData: false,
+                    multiple: self.props.multiple,
                     label: self.props.label
                   }
                   return <td key={'td-language-' + language.id + '-' + self.props.id}>{self.renderField(props)}</td>
