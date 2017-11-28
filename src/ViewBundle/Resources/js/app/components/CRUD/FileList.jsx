@@ -7,6 +7,8 @@ import Button from '../Button';
 import CRUD from '../CRUD';
 import Actions from '../Actions';
 import CRUDFile from '../../flux/CRUDFile';
+import Dialog from '../Dialog';
+import Form from '../Form';
 
 class FileList extends CRUD {
 
