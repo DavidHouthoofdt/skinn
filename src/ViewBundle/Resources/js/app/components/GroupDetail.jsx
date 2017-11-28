@@ -1,6 +1,6 @@
 /* @flow */
 import React, {Component} from 'react';
-import FileList from './FileList';
+import FileList from './CRUD/FileList';
 
 type Props = {
   group: Object,

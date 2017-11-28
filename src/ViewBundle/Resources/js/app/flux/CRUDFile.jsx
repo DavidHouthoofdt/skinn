@@ -1,4 +1,5 @@
 /* @flow */
+var _ = require('lodash');
 
 import {EventEmitter} from 'fbemitter';
 
@@ -54,8 +55,8 @@ const CRUDFile = {
   addListener(eventType: string, fn: Function) {
     emitter.addListener(eventType, fn);
   },
-  
-  createFile(file: Object) {
+
+  createObject(file: Object) {
     $.ajax({
       url: '/api/files',
       data: file,
@@ -75,7 +76,7 @@ const CRUDFile = {
     );
   },
 
-  updateFile(id: number, file: Object) {
+  updateObject(id: number, file: Object) {
     $.ajax({
       url: '/api/files/' + id,
       data: file,
@@ -85,6 +86,27 @@ const CRUDFile = {
       function (data) {
         files[id] = data;
         emitter.emit('file-updated');
+      }.bind(this)
+    ).error(
+      function (jqXHR) {
+        if (jqXHR.statusText !== 'abort') {
+          throw new Error('Failed to update the file data.');
+        }
+      }.bind(this)
+    );
+  },
+
+   deleteObject(id: number) {
+    $.ajax({
+      url: '/api/files/' + id,
+      type: 'DELETE',
+      dataType: 'json',
+    }).success(
+      function () {
+        _.remove(files, function(currentObject) {
+            return currentObject.id === id;
+        });
+        emitter.emit('file-deleted');
       }.bind(this)
     ).error(
       function (jqXHR) {

@@ -7,7 +7,7 @@ import CRUDLanguage from './flux/CRUDLanguage';
 import CRUDGroup from './flux/CRUDGroup';
 import CRUDFile from './flux/CRUDFile';
 
-import LanguageList from './components/LanguageList';
+import LanguageList from './components/CRUD/LanguageList';
 
 CRUDLanguage.init();
 CRUDGroup.init();

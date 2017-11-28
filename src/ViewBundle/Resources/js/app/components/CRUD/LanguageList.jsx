@@ -2,10 +2,16 @@
 
 var _ = require('lodash');
 
-import CRUDLanguage from '../flux/CRUDLanguage';
-import React, {Component} from 'react';
+import Button from '../Button';
+import CRUDLanguage from '../../flux/CRUDLanguage';
+import React from 'react';
+import CRUD from '../CRUD';
 
-class LanguageList extends Component {
+class LanguageList extends CRUD {
+
+    static defaultProps = Object.assign({}, CRUD.defaultProps, {
+      CRUDObject: CRUDLanguage
+    });
 
     constructor(props) {
       super(props);
@@ -63,8 +69,11 @@ class LanguageList extends Component {
                <hr />
                {this.state.activeLanguage !== null &&
                     <span>Active Language : {this.state.activeLanguage.name}<hr /></span>
-
                 }
+              <Button
+                  onClick={this._addNewDialog.bind(this)}>
+                  + add language
+              </Button>
             </div>
         );
       }
