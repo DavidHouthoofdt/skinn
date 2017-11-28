@@ -36,6 +36,46 @@ const CRUDLanguage = {
     );
   },
 
+  createObject(file: Object) {
+    $.ajax({
+      url: '/api/languages',
+      data: file,
+      type: 'POST',
+      dataType: 'json',
+    }).success(
+      function (data) {
+        languages[data.id] = data;
+        emitter.emit('language-created');
+      }.bind(this)
+    ).error(
+      function (jqXHR) {
+        if (jqXHR.statusText !== 'abort') {
+          throw new Error('Failed to create the language.');
+        }
+      }.bind(this)
+    );
+  },
+
+  updateObject(id: number, file: Object) {
+    $.ajax({
+      url: '/api/languages/' + id,
+      data: file,
+      type: 'PUT',
+      dataType: 'json',
+    }).success(
+      function (data) {
+        languages[id] = data;
+        emitter.emit('language-updated');
+      }.bind(this)
+    ).error(
+      function (jqXHR) {
+        if (jqXHR.statusText !== 'abort') {
+          throw new Error('Failed to update the file data.');
+        }
+      }.bind(this)
+    );
+  },
+
   getLanguages(): Array<Object> {
     return languages;
   },
@@ -60,6 +100,33 @@ const CRUDLanguage = {
 
   addListener(eventType: string, fn: Function) {
     emitter.addListener(eventType, fn);
+  },
+
+
+  /**
+   * Get the form fields for the file edit
+   */
+  getFormFields(newForm) {
+    return [
+      {
+        type: (newForm) ? 'hidden': '',
+        value: activeLanguage === null ? '' : activeLanguage.id,
+        label: (newForm) ? '' : 'Id',
+        hasLanguageData: false,
+        readonly: true,
+        id: 'id',
+        multiple: false,
+      },
+      {
+        type: '',
+        value: activeLanguage === null ? '' : activeLanguage.name,
+        label: 'Name',
+        hasLanguageData: false,
+        readonly: false,
+        id: 'name',
+        multiple: false,
+      }
+    ]
   },
 
 };
