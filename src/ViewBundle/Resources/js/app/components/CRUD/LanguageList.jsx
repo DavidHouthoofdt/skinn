@@ -74,6 +74,8 @@ class LanguageList extends CRUD {
                   onClick={this._addNewDialog.bind(this)}>
                   + add language
               </Button>
+
+              {this._renderDialog()}
             </div>
         );
       }
