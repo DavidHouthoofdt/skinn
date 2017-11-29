@@ -23,7 +23,6 @@ class FileList extends CRUD {
       })
     });
     CRUDFile.addListener('file-updated', () => {
-      console.log(CRUDFile.getFiles());
       this.setState({
         files: CRUDFile.getFiles(),
         activeFile: null
