@@ -11,7 +11,7 @@ class CRUD extends Component {
     }
 
     actionClick(record: Object, action: string) {
-        this.setState({dialog: {type: action, record: record}});
+      this.setState({dialog: {type: action, record: record}});
     }
 
     _addNewDialog() {

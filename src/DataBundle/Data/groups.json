@@ -1,1 +1,1 @@
-{"1":{"name":"Groep 1","id":1},"2":{"id":2,"name":"group 2"},"3":{"name":"Group 3","id":3}}
+{"1":{"name":"Groep 1","id":1},"2":{"id":"2","name":"group 2"},"3":{"name":"Group 3","id":3}}

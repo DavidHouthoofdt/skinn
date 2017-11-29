@@ -12,6 +12,13 @@ const CRUDFile = {
   init() {
   },
 
+  /**
+   * Load the files that are in the group
+   *
+   * @param {numeric} groupId id of the group
+   *
+   * @returns {Array}
+   */
   loadGroupFiles(groupId: number) {
     $.ajax({
       url: '/api/groups/' + groupId + '/files.json',
@@ -30,18 +37,38 @@ const CRUDFile = {
     );
   },
 
+  /**
+   * Get the loaded files
+   *
+   * @returns {Array}
+   */
   getFiles(): Array<Object> {
     return files;
   },
 
+  /**
+   * Get the number of files
+   *
+   * @return {numeric}
+   */
   getCount(): number {
     return files.length;
   },
 
+  /**
+   * Get the File
+   *
+   * @returns {Object}|{null}
+   */
   getFile(fileId: number): ?Object {
     return fileId in files ? files[fileId] : null;
   },
 
+  /**
+   * Get the active File
+   *
+   * @returns {Object}|{null}
+   */
   getActiveFile() : Object {
     return activeFile;
   },

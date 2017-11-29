@@ -21,18 +21,19 @@ export type FormInputField = {
 class FormInput extends Component {
 
   props: FormInputField;
-      static defaultProps = {
-        type: 'input',
-        value: '',
-        ref: 'input'
-      };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-          value: props.defaultValue
-        };
-   }
+  static defaultProps = {
+    type: 'input',
+    value: '',
+    ref: 'input'
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: props.defaultValue
+    };
+  }
 
 
   getValue(): FormInputFieldValue {
@@ -56,29 +57,30 @@ class FormInput extends Component {
     }
     return value;
   }
- 
-   componentWillReceiveProps(nextProps) {
-        this.setState({value: nextProps.value});
-    }
 
-    //re-render when input changes
-    _handleChange(e){
-        this.setState({value: e.target.value});
-    }
+  componentWillReceiveProps(nextProps) {
+       this.setState({value: nextProps.value});
+  }
 
+  //re-render when input changes
+  _handleChange(e) {
+      this.setState({value: e.target.value});
+  }
+
+  //no need to re-render if id stays the same
   shouldComponentUpdate(nextProps) {
     return (nextProps !== this.props.id);
   }
 
-  renderField(props: Object)
-  {
-
+  //render the input field
+  renderField(props: Object) {
     const common: Object = {
       id: props.id,
       ref: (typeof props.ref === 'undefined' || props.ref  === '') ? 'input' : props.ref,
       defaultValue: props.defaultValue,
     };
     var inputType = props.type === 'hidden' ? 'hidden' : 'text';
+
     switch (this.props.type) {
       case 'text':
         return <textarea {...common} onChange={this._handleChange.bind(this)} value={this.state.value} />;
@@ -88,7 +90,6 @@ class FormInput extends Component {
   }
 
   render() {
-
     if (this.props.type === 'hidden') {
       return this.renderField(this.props);
     } else if (this.props.hasLanguageData === true) {
