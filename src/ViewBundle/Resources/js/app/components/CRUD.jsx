@@ -45,25 +45,11 @@ class CRUD extends Component {
       }
       this.props.CRUDObject.createObject(this.refs.form.getData());
     }
-    
-    renderCreateFormDialog(formFields) 
-    {
-        return (
-          <Dialog
-            modal={true}
-            header={'Add item'}
-            confirmLabel={'Add'}
-            hasCancel={true}
-            onAction={this._createDataDialog.bind(this)}
-          >
-            <Form
-              ref="form"
-              fields={formFields}
-              readonly={false} />
-          </Dialog>
-        );
-    }
 
+
+    /**
+     * Render the dialog, this will load the needed dialog for the requested action
+     */
     _renderDialog() {
         if (!this.state.dialog) {
           return null;
@@ -83,6 +69,26 @@ class CRUD extends Component {
         }
     }
 
+    /**
+     * Render the create form dialog
+     */
+    renderCreateFormDialog(formFields)
+    {
+        return (
+          <Dialog
+            modal={true}
+            header={'Add item'}
+            confirmLabel={'Add'}
+            hasCancel={true}
+            onAction={this._createDataDialog.bind(this)}
+          >
+            <Form
+              ref="form"
+              fields={formFields}
+              readonly={false} />
+          </Dialog>
+        );
+    }
     /*
      * Render the delete dialog
      */
@@ -100,7 +106,7 @@ class CRUD extends Component {
     }
 
     /**
-     * Render the form dialog
+     * Render the create dialog
      */
     _renderCreateFormDialog() {
         var formFields = this.props.CRUDObject.getFormFields(true);

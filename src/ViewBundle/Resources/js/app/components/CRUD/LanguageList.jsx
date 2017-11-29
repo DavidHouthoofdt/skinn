@@ -6,6 +6,7 @@ import Button from '../Button';
 import CRUDLanguage from '../../flux/CRUDLanguage';
 import React from 'react';
 import CRUD from '../CRUD';
+import Actions from '../Actions';
 
 class LanguageList extends CRUD {
 
@@ -25,6 +26,13 @@ class LanguageList extends CRUD {
           languages: CRUDLanguage.getLanguages(),
           activeLanguage: CRUDLanguage.getActiveLanguage()
         })
+      });
+
+      CRUDLanguage.addListener('language-updated', () => {
+        this.setState({
+          languages: CRUDLanguage.getLanguages(),
+          activeLanguage: CRUDLanguage.getActiveLanguage()
+        });
       });
 
       CRUDLanguage.addListener('languages-loaded', () => {
@@ -67,6 +75,7 @@ class LanguageList extends CRUD {
         return (
           <div className="languageItem" key={'language-' + language.id} onClick={selectLanguage.bind(this)}>
             {language.name}
+            <Actions onAction={this.actionClick.bind(this, language)} />
           </div>
         );
       }.bind(this));
