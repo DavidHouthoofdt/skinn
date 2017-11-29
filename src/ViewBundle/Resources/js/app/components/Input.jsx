@@ -67,7 +67,7 @@ class Input extends Component {
         _.map( this.props.options, function(option) {
             options.push({value: option.id, label: option.name});
         })
-        return <Select options={options} value={this.state.value} onChange={this._handleChange.bind(this)} multi={false} />
+        return <Select  {...common}  options={options} value={this.state.value} onChange={this._handleChange.bind(this)} multi={false} />
       }
       case 'text':
         return <textarea {...common} onChange={this._handleChange.bind(this)} value={this.state.value} />;
