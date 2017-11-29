@@ -39,7 +39,6 @@ class Select extends Component {
     return <select  {...common}  onChange={this._handleChange.bind(this)} >
     {
       _.map( this.props.options, function(option) {
-        console.log(option);
         return <option value={option.value} key={'option-' + option.value}>{option.label}</option>
      })
     }

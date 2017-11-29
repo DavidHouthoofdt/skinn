@@ -44,7 +44,7 @@ const CRUDFile = {
    * @returns {Array}
    */
   getFiles(): Array<Object> {
-    return files_.orderBy(files, ['sequence'], ['asc']);
+    return _.orderBy(files, ['sequence'], ['asc']);
   },
 
   /**
@@ -93,7 +93,7 @@ const CRUDFile = {
     }).success(
       function (data) {
         files[data.id] = data;
-        emitter.emit('file-created');
+        emitter.emit('file-created', data);
       }.bind(this)
     ).error(
       function (jqXHR) {
@@ -113,7 +113,7 @@ const CRUDFile = {
     }).success(
       function (data) {
         files[id] = data;
-        emitter.emit('file-updated');
+        emitter.emit('file-updated', data);
       }.bind(this)
     ).error(
       function (jqXHR) {

@@ -7,6 +7,7 @@ import GroupDetail from '../GroupDetail';
 import Button from '../Button';
 import Actions from '../Actions';
 import CRUDGroup from '../../flux/CRUDGroup';
+import CRUDFile from '../../flux/CRUDFile';
 import CRUD from '../CRUD';
 
 class GroupList extends CRUD {
@@ -33,6 +34,16 @@ class GroupList extends CRUD {
       this.setState({
         groups: CRUDGroup.getGroups(),
       })
+    });
+
+    CRUDGroup.addListener('groups-loaded', () => {
+      this.setState({
+        groups: CRUDGroup.getGroups()
+      });
+    });
+
+    CRUDFile.addListener('file-updated', (file) => {
+      this.groupSelected(this.state.groups[file.group_id]);
     });
 
     CRUDGroup.addListener('groups-loaded', () => {
