@@ -2,6 +2,7 @@
 var _ = require('lodash');
 
 import {EventEmitter} from 'fbemitter';
+import CRUDGroup from './CRUDGroup';
 
 let files = [];
 let activeFile = null;
@@ -184,7 +185,8 @@ const CRUDFile = {
         multiple: true,
       },
       {
-        type: '',
+        type: 'select',
+        options: CRUDGroup.getGroups(),
         value: activeFile === null ? '' : activeFile.group_id,
         label: 'Group',
         hasLanguageData: false,

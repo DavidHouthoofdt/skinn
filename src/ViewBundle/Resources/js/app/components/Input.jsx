@@ -1,4 +1,5 @@
 /* @flow */
+var _ = require('lodash');
 
 import React, {Component} from 'react';
 
@@ -61,6 +62,13 @@ class Input extends Component {
     var inputType = this.props.type === 'hidden' ? 'hidden' : 'text';
 
     switch (this.props.type) {
+      case 'select': {
+        var options = [];
+        _.map( this.props.options, function(option) {
+            options.push({value: option.id, label: option.name});
+        })
+        return <Select options={options} value={this.state.value} onChange={this._handleChange.bind(this)} multi={false} />
+      }
       case 'text':
         return <textarea {...common} onChange={this._handleChange.bind(this)} value={this.state.value} />;
       default:
