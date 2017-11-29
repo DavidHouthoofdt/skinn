@@ -51,6 +51,9 @@
     "eslint": "^3.19.0",
     "eslint-plugin-react": "^7.0.1",
     "fbemitter": "^2.1.1",
+    "gulp-eslint": "^4.0.0",
+    "gulp-sequence": "^0.4.6",
+    "install": "^0.10.2",
     "jquery": "~2.1.0",
     "lodash": "^4.17.4",
     "react": "~15.5.4",
@@ -58,7 +61,8 @@
     "react-dom": "~15.5.4",
     "react-slider": "~0.8.0",
     "requirejs": "~2.3.3",
-    "uglify-js": ">=3.0.15"
+    "uglify-js": ">=3.0.15",
+    "vinyl-source-stream": "^1.1.0"
   },
   "devDependencies": {
     "babel-plugin-transform-class-properties": "^6.24.1",
