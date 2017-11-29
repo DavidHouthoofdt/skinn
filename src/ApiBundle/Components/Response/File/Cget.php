@@ -26,11 +26,11 @@ class Cget extends \ApiBundle\Components\Response
 {
     /**
      * return the files
-     * 
+     *
      * @return array
      */
     public function buildResponse()
     {
-        return $this->dm->getData();
+        return $this->dm->getData('sequence');
     }
 }

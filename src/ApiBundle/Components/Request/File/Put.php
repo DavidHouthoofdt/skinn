@@ -38,7 +38,10 @@ class Put extends \ApiBundle\Components\Request
             ],
             'id' => [
                 'required' => true,
-            ]
+            ],
+            'group_id' => [
+                'required' => true,
+            ],
         ];
     }
 }

@@ -35,7 +35,10 @@ class Post extends \ApiBundle\Components\Request
         return [
             'name' => [
                 'required' => true,
-            ]
+            ],
+            'group_id' => [
+                'required' => true,
+            ],
         ];
     }
 }

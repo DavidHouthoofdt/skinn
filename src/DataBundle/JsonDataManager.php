@@ -21,18 +21,18 @@ class JsonDataManager {
      * @var string
      */
     protected $data;
-    
+
     /**
      *
      * @var string
      */
     protected $file;
-    
+
     /**
      * The constructor
-     * 
+     *
      * @param string $file the json file
-     * 
+     *
      * @throws \Exception
      */
     public function __construct(string $file) {
@@ -50,32 +50,36 @@ class JsonDataManager {
 
     /**
      * Get the data from the json file
-     * 
+     *
+     * @param string $orderBy order the data based on this key
+     *
      * @return array
      */
-    public function getData() {
-        return $this->data;
+    public function getData($orderBy = '') {
+        return ($orderBy === '') ? $this->data: $this->orderData($orderBy);
     }
-    
+
+
+
     /**
      * Store the data
-     * 
+     *
      * @param array $data the data to store
-     * 
+     *
      * @return boolean
      */
     public function storeData(array $data)
     {
         //again data should be validated ... but for purpose of the example
-        //this is skipped 
+        //this is skipped
         return file_put_contents($this->file, json_encode($data));
     }
-    
+
     /**
      * Get the data based on the id
-     * 
+     *
      * @param int $id the id
-     * 
+     *
      * @return array|null
      */
     public function getById($id)
@@ -85,18 +89,18 @@ class JsonDataManager {
         }
         return $this->data[$id];
     }
-    
+
     /**
      * Update the data
-     * 
+     *
      * @param int $id
      * @param array $data
-     * 
+     *
      * @throws Exception
-     * 
+     *
      * @return boolen
      */
-    public function updateData(int $id, array $data) 
+    public function updateData(int $id, array $data)
     {
         if (!isset($this->data[$id])) {
             throw new \Exception(sprintf('id %d not found', $id));
@@ -104,34 +108,34 @@ class JsonDataManager {
         $this->data[$id] = $data;
         return $this->storeData($this->data);
     }
-    
+
      /**
      * insert the data
-     * 
+     *
      * @param array $data id col will be ignored
-     * 
+     *
      * @throws Exception
-     * 
+     *
      * @return boolean
      */
-    public function insertData(array &$data) 
+    public function insertData(array &$data)
     {
         $newId = sizeof($this->data) + 1;
         $data['id'] = $newId;
         $this->data[$newId] = $data;
         return $this->storeData($this->data);
     }
-    
+
     /**
      * Delete the data
-     * 
+     *
      * @param int $id
-     * 
+     *
      * @throws Exception
-     * 
+     *
      * @return boolen
      */
-    public function deleteData(int $id) 
+    public function deleteData(int $id)
     {
         if (!isset($this->data[$id])) {
             throw new \Exception(sprintf('id %d not found', $id));
@@ -139,10 +143,10 @@ class JsonDataManager {
         unset($this->data[$id]);
         return $this->storeData($this->data);
     }
-    
+
     /**
      * Find the data
-     * 
+     *
      * @param array $search
      */
     public function findData($search)
@@ -153,9 +157,29 @@ class JsonDataManager {
                 $results,
                 function($current) use ($key, $value) {
                     return (isset($current[$key]) && $current[$key] == $value);
-                } 
+                }
             );
         }
         return $results;
+    }
+
+    /**
+     * Order the data by the field
+     *
+     * @param string $orderby order based on this field
+     *
+     * @return array
+     */
+    protected function orderData($orderby)
+    {
+        $tmp = $this->data;
+        uasort($tmp, function($a, $b) use ($orderby) {
+            if (isset($a->{$orderby}) && isset($b->{$orderby})) {
+                return $a->{$orderby} > $b->{$orderby};
+            } else {
+                return false;
+            }
+        });
+        return $tmp;
     }
 }
