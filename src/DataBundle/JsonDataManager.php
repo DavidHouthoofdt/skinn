@@ -56,7 +56,7 @@ class JsonDataManager {
      * @return array
      */
     public function getData($orderBy = '') {
-        return ($orderBy === '') ? $this->data: $this->orderData($orderBy);
+        return ($orderBy === '') ? $this->data : $this->orderData($this->data, $orderBy);
     }
 
 
@@ -163,8 +163,9 @@ class JsonDataManager {
                 }
             );
         }
+   
         if ($orderBy !== '') {
-            $results = $this->orderData($orderBy);
+            $results = $this->orderData($results, $orderBy);
         }
         return $results;
     }
@@ -172,20 +173,20 @@ class JsonDataManager {
     /**
      * Order the data by the field
      *
+     * @param array  $data    the data to order
      * @param string $orderby order based on this field
      *
      * @return array
      */
-    protected function orderData($orderby)
+    protected function orderData($data, $orderby)
     {
-        $tmp = $this->data;
-        uasort($tmp, function($a, $b) use ($orderby) {
+        uasort($data, function($a, $b) use ($orderby) {
             if (isset($a[$orderby]) && isset($b[$orderby])) {
                 return $a[$orderby] > $b[$orderby];
             } else {
                 return false;
             }
         });
-        return $tmp;
+        return $data;
     }
 }

@@ -2,7 +2,7 @@
 var _ = require('lodash');
 
 import React, {Component} from 'react';
-
+import Select  from './Select';
 type FormInputFieldType = 'text' | 'input';
 
 export type FormInputFieldValue = string | number;
@@ -35,8 +35,10 @@ class Input extends Component {
   }
 
   getValue(): FormInputFieldValue {
-    var value = '';
-    value = this.refs.input.value;
+    var value = 'value' in this.refs.input
+      ? this.refs.input.value
+      : this.refs.input.getValue();
+
     if (this.props.multiple) {
       value = value.split(';');
     }
