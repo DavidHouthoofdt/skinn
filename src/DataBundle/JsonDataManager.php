@@ -148,8 +148,11 @@ class JsonDataManager {
      * Find the data
      *
      * @param array $search
+     * @param string $orderBy
+     *
+     * @return array
      */
-    public function findData($search)
+    public function findData($search, $orderBy = '')
     {
         $results = $this->data;
         foreach ($search as $key => $value) {
@@ -159,6 +162,9 @@ class JsonDataManager {
                     return (isset($current[$key]) && $current[$key] == $value);
                 }
             );
+        }
+        if ($orderBy !== '') {
+            $results = $this->orderData($orderBy);
         }
         return $results;
     }

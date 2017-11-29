@@ -31,7 +31,7 @@ use DataBundle\JsonDataManager;
 class Get extends Response {
 
     protected $fileManager;
-    
+
     /**
      * Create response
      *
@@ -46,7 +46,7 @@ class Get extends Response {
        parent::__construct($request, $dm);
        $this->fileManager = $fileDm;
     }
-    
+
     /**
      * Get the respone
      *
@@ -54,6 +54,6 @@ class Get extends Response {
      */
     public function buildResponse()
     {
-        return $this->fileManager->findData(['group_id' => $this->request->get('id')]);
+        return $this->fileManager->findData(['group_id' => $this->request->get('id')], 'sequence');
     }
 }
