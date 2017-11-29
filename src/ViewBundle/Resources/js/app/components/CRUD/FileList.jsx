@@ -99,7 +99,6 @@ class FileList extends CRUD {
         onClick={this._addNewDialog.bind(this)}>
         + add file
       </Button>;
-
     if (this.state.files === null) {
       return <div>Loading files ...</div>;
     } else if (this.state.files.length === 0) {

@@ -43,7 +43,7 @@ const CRUDFile = {
    * @returns {Array}
    */
   getFiles(): Array<Object> {
-    return files;
+    return _.orderBy(files, ['sequence'], ['asc']);
   },
 
   /**
