@@ -184,11 +184,19 @@ const CRUDFile = {
         multiple: true,
       },
       {
-        type: 'Group',
+        type: '',
         value: activeFile === null ? '' : activeFile.group_id,
         label: 'Group',
         hasLanguageData: false,
         id: 'group_id',
+        multiple: false,
+      },
+      {
+        type: '',
+        value: activeFile === null && typeof activeFile.sequence !== 'undefined' ? '' : activeFile.sequence,
+        label: 'Sequence',
+        hasLanguageData: false,
+        id: 'sequence',
         multiple: false,
       }
     ]

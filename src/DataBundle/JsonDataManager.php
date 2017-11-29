@@ -174,8 +174,8 @@ class JsonDataManager {
     {
         $tmp = $this->data;
         uasort($tmp, function($a, $b) use ($orderby) {
-            if (isset($a->{$orderby}) && isset($b->{$orderby})) {
-                return $a->{$orderby} > $b->{$orderby};
+            if (isset($a[$orderby]) && isset($b[$orderby])) {
+                return $a[$orderby] > $b[$orderby];
             } else {
                 return false;
             }
