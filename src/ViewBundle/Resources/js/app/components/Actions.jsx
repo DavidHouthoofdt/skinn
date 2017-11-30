@@ -18,11 +18,7 @@ const Actions = (props: Props) =>
       className="ActionsEdit"
       title="Edit"
       onClick={props.onAction.bind(null, 'edit')}>&#10000;</span>
-    /*<span
-      tabIndex="0"
-      className="ActionsDelete"
-      title="Delete"
-      onClick={props.onAction.bind(null, 'delete')}>x</span>*/
+
   </div>
 
 Actions.defaultProps = {
