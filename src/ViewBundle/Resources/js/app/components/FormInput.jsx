@@ -48,7 +48,7 @@ class FormInput extends Component {
 
   render() {
     if (this.props.type === 'hidden') {
-      return this.renderField(this.props);
+      return <Input {...this.props} ref={'input'} />;
     } else if (this.props.hasLanguageData === true) {
       let languages = CRUDLanguage.getLanguages();
       var self = this;
